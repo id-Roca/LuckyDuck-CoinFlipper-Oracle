@@ -1,35 +1,41 @@
-Project progress
+# 🦆 Lucky Duck
 
-0/9 completed
+**Leave a little room for chance.**
 
+Lucky Duck is a playful decision-making application designed to make everyday decisions a little more fun. Whether you're struggling to choose between two options or looking for some duck-inspired wisdom, Lucky Duck is here to help.
 
-[x] Set up React, TypeScript, TanStack Router and DaisyUI
-[x] Create the routes and shared layout
-[x] Build the coin-flipping functionality
-[ ] Create the array of fortune-telling answers
-[ ] Build the question form
-[ ] Implement random answer selection
-[ ] Style the application
-[ ] Add Clerk authentication
-[ ] Optional animations and additional features
+## Features
 
-Visual direction
+- **Coin Toss** – Flip a virtual coin and keep track of your tosses.
+- **Duck Oracle** – Ask a question and receive a randomly selected piece of duck wisdom.
+- **Wisdom Details** – Explore individual oracle answers through dynamic routes.
 
-Deep forest
-#102E2B Navbar / footer
+## Technologies
 
-Emerald teal
-#087F73 Primary color
+- React
+- TypeScript
+- TanStack Router
+- Vite
+- Tailwind CSS
+- daisyUI
 
-Petrol blue
-#214C63 Secondary color
+## Getting Started
 
+```bash
+npm install
+npm run dev
+```
 
-Muted gold
-#D9C65C Accent / coin
+## Project Status – Work in Progress 🚧
 
-Warm ivory
-#F4F1EA Page background
+This project was created as part of my web development training at the Digital Career Institute (DCI).
 
-Warm taupe
-#B0A497 Neutral details
+It reflects my current understanding of React, component-based development, state management and routing. Some planned features and technical requirements, including custom hooks, `useEffect` and search parameters, have not yet been implemented.
+
+AI was used as a supporting resource for learning, debugging, styling and routing.
+
+I intend to continue developing this project as my knowledge and skills grow.
+
+---
+
+*Sometimes, all you need is a little duck wisdom.* 🦆

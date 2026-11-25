@@ -28,7 +28,7 @@ export default function Oracle() {
             gym subscription? Consult the ancient wisdom of the pond.
           </p>
 
-          <p className='mt-4'>
+          <p className="mt-4">
             Type in your question and find out if the duck's opinion speaks to
             you!
           </p>
@@ -36,10 +36,10 @@ export default function Oracle() {
 
         <article>
           {oracle && (
-            <article className='mt-10'>
+            <article className="mt-10">
               <h2>{oracle.title}</h2>
-              <p className='mt-4'>{oracle.answer}</p>
-              <img src={oracle.duckImg} alt={oracle.alt} />
+              <p className="mt-4">{oracle.answer}</p>
+              <img className="w-64 rounded-2xl mt-4" src={oracle.duckImg} alt={oracle.alt} />
             </article>
           )}
         </article>

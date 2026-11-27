@@ -9,130 +9,233 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as FlipCoinRouteImport } from './routes/flip-coin'
-import { Route as OracleRouteImport } from './routes/oracle'
-import { Route as OracleIndexRouteImport } from './routes/oracle.index'
-import { Route as OracleIdRouteImport } from './routes/oracle.$id'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as PublicRouteImport } from './routes/_public'
+import { Route as AuthenticatedOracleRouteImport } from './routes/_authenticated/oracle'
+import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PublicFlipCoinRouteImport } from './routes/_public/flip-coin'
+import { Route as AuthenticatedOracleIndexRouteImport } from './routes/_authenticated/oracle.index'
+import { Route as AuthenticatedOracleIdRouteImport } from './routes/_authenticated/oracle.$id'
+import { Route as PublicSigninSplatRouteImport } from './routes/_public/signin.$'
+import { Route as PublicSignupSplatRouteImport } from './routes/_public/signup.$'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FlipCoinRoute = FlipCoinRouteImport.update({
-  id: '/flip-coin',
-  path: '/flip-coin',
+const PublicRoute = PublicRouteImport.update({
+  id: '/_public',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OracleRoute = OracleRouteImport.update({
+const AuthenticatedOracleRoute = AuthenticatedOracleRouteImport.update({
   id: '/oracle',
   path: '/oracle',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRoute,
 } as any)
-const OracleIndexRoute = OracleIndexRouteImport.update({
+const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => OracleRoute,
+  getParentRoute: () => PublicRoute,
 } as any)
-const OracleIdRoute = OracleIdRouteImport.update({
+const PublicFlipCoinRoute = PublicFlipCoinRouteImport.update({
+  id: '/flip-coin',
+  path: '/flip-coin',
+  getParentRoute: () => PublicRoute,
+} as any)
+const AuthenticatedOracleIndexRoute =
+  AuthenticatedOracleIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedOracleRoute,
+  } as any)
+const AuthenticatedOracleIdRoute = AuthenticatedOracleIdRouteImport.update({
   id: '/$id',
   path: '/$id',
-  getParentRoute: () => OracleRoute,
+  getParentRoute: () => AuthenticatedOracleRoute,
+} as any)
+const PublicSigninSplatRoute = PublicSigninSplatRouteImport.update({
+  id: '/signin/$',
+  path: '/signin/$',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicSignupSplatRoute = PublicSignupSplatRouteImport.update({
+  id: '/signup/$',
+  path: '/signup/$',
+  getParentRoute: () => PublicRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/flip-coin': typeof FlipCoinRoute
-  '/oracle': typeof OracleRouteWithChildren
-  '/oracle/$id': typeof OracleIdRoute
-  '/oracle/': typeof OracleIndexRoute
+  '/': typeof PublicIndexRoute
+  '/oracle': typeof AuthenticatedOracleRouteWithChildren
+  '/flip-coin': typeof PublicFlipCoinRoute
+  '/oracle/$id': typeof AuthenticatedOracleIdRoute
+  '/signin/$': typeof PublicSigninSplatRoute
+  '/signup/$': typeof PublicSignupSplatRoute
+  '/oracle/': typeof AuthenticatedOracleIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/flip-coin': typeof FlipCoinRoute
-  '/oracle/$id': typeof OracleIdRoute
-  '/oracle': typeof OracleIndexRoute
+  '/': typeof PublicIndexRoute
+  '/flip-coin': typeof PublicFlipCoinRoute
+  '/oracle/$id': typeof AuthenticatedOracleIdRoute
+  '/signin/$': typeof PublicSigninSplatRoute
+  '/signup/$': typeof PublicSignupSplatRoute
+  '/oracle': typeof AuthenticatedOracleIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/flip-coin': typeof FlipCoinRoute
-  '/oracle': typeof OracleRouteWithChildren
-  '/oracle/$id': typeof OracleIdRoute
-  '/oracle/': typeof OracleIndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/_public': typeof PublicRouteWithChildren
+  '/_authenticated/oracle': typeof AuthenticatedOracleRouteWithChildren
+  '/_public/flip-coin': typeof PublicFlipCoinRoute
+  '/_public/': typeof PublicIndexRoute
+  '/_authenticated/oracle/$id': typeof AuthenticatedOracleIdRoute
+  '/_public/signin/$': typeof PublicSigninSplatRoute
+  '/_public/signup/$': typeof PublicSignupSplatRoute
+  '/_authenticated/oracle/': typeof AuthenticatedOracleIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/flip-coin' | '/oracle' | '/oracle/$id' | '/oracle/'
+  fullPaths:
+    | '/'
+    | '/oracle'
+    | '/flip-coin'
+    | '/oracle/$id'
+    | '/signin/$'
+    | '/signup/$'
+    | '/oracle/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/flip-coin' | '/oracle/$id' | '/oracle'
-  id: '__root__' | '/' | '/flip-coin' | '/oracle' | '/oracle/$id' | '/oracle/'
+  to: '/' | '/flip-coin' | '/oracle/$id' | '/signin/$' | '/signup/$' | '/oracle'
+  id:
+    | '__root__'
+    | '/_authenticated'
+    | '/_public'
+    | '/_authenticated/oracle'
+    | '/_public/flip-coin'
+    | '/_public/'
+    | '/_authenticated/oracle/$id'
+    | '/_public/signin/$'
+    | '/_public/signup/$'
+    | '/_authenticated/oracle/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  FlipCoinRoute: typeof FlipCoinRoute
-  OracleRoute: typeof OracleRouteWithChildren
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  PublicRoute: typeof PublicRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/flip-coin': {
-      id: '/flip-coin'
-      path: '/flip-coin'
-      fullPath: '/flip-coin'
-      preLoaderRoute: typeof FlipCoinRouteImport
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PublicRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/oracle': {
-      id: '/oracle'
+    '/_authenticated/oracle': {
+      id: '/_authenticated/oracle'
       path: '/oracle'
       fullPath: '/oracle'
-      preLoaderRoute: typeof OracleRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedOracleRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/oracle/': {
-      id: '/oracle/'
+    '/_public/': {
+      id: '/_public/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof PublicIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/flip-coin': {
+      id: '/_public/flip-coin'
+      path: '/flip-coin'
+      fullPath: '/flip-coin'
+      preLoaderRoute: typeof PublicFlipCoinRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_authenticated/oracle/': {
+      id: '/_authenticated/oracle/'
       path: '/'
       fullPath: '/oracle/'
-      preLoaderRoute: typeof OracleIndexRouteImport
-      parentRoute: typeof OracleRoute
+      preLoaderRoute: typeof AuthenticatedOracleIndexRouteImport
+      parentRoute: typeof AuthenticatedOracleRoute
     }
-    '/oracle/$id': {
-      id: '/oracle/$id'
+    '/_authenticated/oracle/$id': {
+      id: '/_authenticated/oracle/$id'
       path: '/$id'
       fullPath: '/oracle/$id'
-      preLoaderRoute: typeof OracleIdRouteImport
-      parentRoute: typeof OracleRoute
+      preLoaderRoute: typeof AuthenticatedOracleIdRouteImport
+      parentRoute: typeof AuthenticatedOracleRoute
+    }
+    '/_public/signin/$': {
+      id: '/_public/signin/$'
+      path: '/signin/$'
+      fullPath: '/signin/$'
+      preLoaderRoute: typeof PublicSigninSplatRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/signup/$': {
+      id: '/_public/signup/$'
+      path: '/signup/$'
+      fullPath: '/signup/$'
+      preLoaderRoute: typeof PublicSignupSplatRouteImport
+      parentRoute: typeof PublicRoute
     }
   }
 }
 
-interface OracleRouteChildren {
-  OracleIdRoute: typeof OracleIdRoute
-  OracleIndexRoute: typeof OracleIndexRoute
+interface AuthenticatedOracleRouteChildren {
+  AuthenticatedOracleIdRoute: typeof AuthenticatedOracleIdRoute
+  AuthenticatedOracleIndexRoute: typeof AuthenticatedOracleIndexRoute
 }
 
-const OracleRouteChildren: OracleRouteChildren = {
-  OracleIdRoute: OracleIdRoute,
-  OracleIndexRoute: OracleIndexRoute,
+const AuthenticatedOracleRouteChildren: AuthenticatedOracleRouteChildren = {
+  AuthenticatedOracleIdRoute: AuthenticatedOracleIdRoute,
+  AuthenticatedOracleIndexRoute: AuthenticatedOracleIndexRoute,
 }
 
-const OracleRouteWithChildren =
-  OracleRoute._addFileChildren(OracleRouteChildren)
+const AuthenticatedOracleRouteWithChildren =
+  AuthenticatedOracleRoute._addFileChildren(AuthenticatedOracleRouteChildren)
+
+interface AuthenticatedRouteChildren {
+  AuthenticatedOracleRoute: typeof AuthenticatedOracleRouteWithChildren
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedOracleRoute: AuthenticatedOracleRouteWithChildren,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
+interface PublicRouteChildren {
+  PublicFlipCoinRoute: typeof PublicFlipCoinRoute
+  PublicIndexRoute: typeof PublicIndexRoute
+  PublicSigninSplatRoute: typeof PublicSigninSplatRoute
+  PublicSignupSplatRoute: typeof PublicSignupSplatRoute
+}
+
+const PublicRouteChildren: PublicRouteChildren = {
+  PublicFlipCoinRoute: PublicFlipCoinRoute,
+  PublicIndexRoute: PublicIndexRoute,
+  PublicSigninSplatRoute: PublicSigninSplatRoute,
+  PublicSignupSplatRoute: PublicSignupSplatRoute,
+}
+
+const PublicRouteWithChildren =
+  PublicRoute._addFileChildren(PublicRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  FlipCoinRoute: FlipCoinRoute,
-  OracleRoute: OracleRouteWithChildren,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  PublicRoute: PublicRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

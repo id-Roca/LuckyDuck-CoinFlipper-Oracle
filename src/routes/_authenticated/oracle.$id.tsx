@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { oracleAnswers } from '#/settings/settings'
 
-export const Route = createFileRoute('/oracle/$id')({
+export const Route = createFileRoute('/_authenticated/oracle/$id')({
   component: RouteComponent,
 })
 

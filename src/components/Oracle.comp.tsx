@@ -5,24 +5,27 @@ import { oracleAnswers } from '#/settings/settings'
 
 export default function Oracle() {
   const [oracle, setOracle] = useState<IOracleData | null>(null)
+  const [showOracle, setShowOracle] = useState(false)
 
-  function onSubmitHandler(e: SubmitEvent<HTMLFormElement>) {
+  function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
 
     const randomAnswer = Math.floor(Math.random() * oracleAnswers.length)
 
     setOracle(oracleAnswers[randomAnswer])
+    setShowOracle(true)
   }
 
   return (
     <>
-      <header className="flex items-center justify-center flex-col p-10 mb-4">
+      <header className="flex items-center justify-center flex-col p-4 m-4">
         <h1 className="text-4xl">The Lucky Duck Oracle</h1>
         <span className="text-3xl mt-4">🦆 🔮</span>
       </header>
 
-      <main className="flex items-center justify-center flex-col p-10 text-center text-xl">
-        <article>
+      <main className="flex items-center justify-center flex-col p-4 text-center text-xl">
+        { !showOracle && 
+        (<article className=' flex flex-col justify-center items-center'>  
           <p>
             Start that ambitious side project? Order another pizza? Get a new
             gym subscription? Consult the ancient wisdom of the pond.
@@ -32,21 +35,28 @@ export default function Oracle() {
             Type in your question and find out if the duck's opinion speaks to
             you!
           </p>
-        </article>
+        </article>)}
 
-        <article>
+
+       
           {oracle && (
-            <article className="mt-10">
+            <article className=" flex flex-col justify-center items-center">
               <h2>{oracle.title}</h2>
               <p className="mt-4">{oracle.answer}</p>
-              <img className="w-64 rounded-2xl mt-4" src={oracle.duckImg} alt={oracle.alt} />
+              
+                <img
+                  className="w-80 rounded-2xl mt-4"
+                  src={oracle.duckImg}
+                  alt={oracle.alt}
+                />
+              
             </article>
           )}
-        </article>
+        
 
         <section className="grid place-content-center h-30 mt-4">
           <form
-            onSubmit={onSubmitHandler}
+            onSubmit={handleSubmit}
             className="flex flex-col justify-center items-center gap-4"
           >
             <input
